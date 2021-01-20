@@ -1,4 +1,5 @@
 from pynput import mouse
+import serial
 import time 
 
 count = 0
@@ -23,8 +24,10 @@ def display(x,y):
     progress = (int)(length*percent)
     print("[{}{}]".format(progress*"|",(length-progress)*"-"))
 
+ser = serial.Serial('/dev/tty.usbserial', 9600)
 
 while True:
     time.sleep(.5)
+    ser.write('5')
     display(count,maxCount)
     count = count-1 if count-1>0 else 0 
